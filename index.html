@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <meta name="google-site-verification" content="ZRBWV-ncFw2bvvNsbd4Trf8EHtVNvIk56OFKDRaKEYM" />
- <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <meta name="google-site-verification" content="ZRBWV-ncFw2bvvNsbd4Trf8EHtVNvIk56OFKDRaKEYM" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
@@ -46,14 +46,13 @@ body {
 
 .logo {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  gap: 12px;
   font-size: 28px;
   font-weight: 700;
   color: var(--purple);
 }
-
 .subtitle {
   text-align: center;
   color: var(--sub);
@@ -154,7 +153,9 @@ footer a {
   <div class="subtitle">Professional English ↔ Hindi Translation</div>
 
   <textarea id="text" placeholder="Type English or Hindi text..."></textarea>
+
 <button onclick="startListening()">🎤 Speak</button>
+
   <div class="actions">
   <button onclick="autoTranslate()">Auto Translate</button>
 <button onclick="translateText('en','pa')">English → Punjabi</button>
@@ -168,11 +169,12 @@ footer a {
   <div class="result-box">
     <button class="copy-btn" onclick="copyText()">Copy</button>
     <div id="result"></div>
-   <button onclick="speakTranslation()">🔊 Listen</button>
+    <button onclick="speakTranslation()">🔊 Listen</button>
+
   </div>
 
   <footer>
-    © 2026 SEKHO LANGUAGE
+   © 2026 SEKHO LANGUAGE
     <a href="privacy.html">Privacy Policy</a>
   </footer>
 </div>
@@ -257,14 +259,5 @@ function speakTranslation() {
 }
 </script>
 
-
 </body>
 </html>
-
-
-
-
-
-
-
-
