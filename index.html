@@ -1,109 +1,152 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>English ↔ Hindi Translator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+    :root {
+        --purple: #6d28d9;
+        --purple-dark: #5b21b6;
+        --light-bg: #f9fafb;
+        --border: #e5e7eb;
+        --text: #111827;
+        --subtext: #6b7280;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
     body {
         margin: 0;
-        padding: 0;
-        font-family: Arial, Helvetica, sans-serif;
-        background: linear-gradient(135deg, #eef2f3, #d9e4f5);
+        font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+        background: var(--light-bg);
+        color: var(--text);
         min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
+        padding: 20px;
     }
 
-    .container {
+    .card {
+        width: 100%;
+        max-width: 700px;
         background: white;
-        width: 90%;
-        max-width: 600px;
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        text-align: center;
+        border-radius: 14px;
+        border: 1px solid var(--border);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+        padding: 35px;
     }
 
     h1 {
-        margin-bottom: 10px;
-        color: #333;
+        margin: 0;
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--purple);
+        text-align: center;
     }
 
-    p {
-        color: #666;
-        font-size: 14px;
-        margin-bottom: 20px;
+    .subtitle {
+        text-align: center;
+        color: var(--subtext);
+        margin-top: 8px;
+        margin-bottom: 30px;
+        font-size: 15px;
     }
 
     textarea {
         width: 100%;
-        height: 120px;
-        padding: 12px;
+        height: 140px;
+        padding: 14px;
         font-size: 16px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        resize: none;
+        border-radius: 10px;
+        border: 1px solid var(--border);
         outline: none;
+        resize: none;
+        transition: border 0.2s, box-shadow 0.2s;
     }
 
-    .buttons {
-        margin-top: 15px;
+    textarea:focus {
+        border-color: var(--purple);
+        box-shadow: 0 0 0 3px rgba(109,40,217,0.15);
+    }
+
+    .actions {
+        margin-top: 18px;
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
     }
 
     button {
-        padding: 10px 18px;
-        font-size: 15px;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        margin: 5px;
-        background: #4f46e5;
+        background: var(--purple);
         color: white;
-        transition: 0.3s;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 20px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.1s;
     }
 
     button:hover {
-        background: #4338ca;
+        background: var(--purple-dark);
     }
 
-    .result {
-        margin-top: 20px;
-        padding: 15px;
-        background: #f3f4f6;
-        border-radius: 8px;
-        min-height: 40px;
+    button:active {
+        transform: scale(0.98);
+    }
+
+    .result-box {
+        margin-top: 25px;
+        border-radius: 10px;
+        background: #faf5ff;
+        border: 1px solid #e9d5ff;
+        padding: 16px;
+        min-height: 50px;
         font-size: 17px;
-        color: #111;
+        line-height: 1.5;
     }
 
     footer {
-        margin-top: 25px;
-        font-size: 12px;
-        color: #888;
+        margin-top: 30px;
+        text-align: center;
+        font-size: 13px;
+        color: var(--subtext);
+    }
+
+    @media (max-width: 500px) {
+        h1 {
+            font-size: 24px;
+        }
     }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="card">
     <h1>English ↔ Hindi Translator</h1>
-    <p>Fast, simple & free translation</p>
+    <div class="subtitle">
+        Accurate, fast and simple language translation
+    </div>
 
-    <textarea id="text" placeholder="Type English or Hindi text here..."></textarea>
+    <textarea id="text" placeholder="Enter English or Hindi text here..."></textarea>
 
-    <div class="buttons">
+    <div class="actions">
         <button onclick="translateText('en','hi')">English → Hindi</button>
         <button onclick="translateText('hi','en')">Hindi → English</button>
     </div>
 
-    <div class="result" id="result"></div>
+    <div class="result-box" id="result"></div>
 
     <footer>
-        © 2026 Translator Website
+        © 2026 · Language Translator
     </footer>
 </div>
 
@@ -117,9 +160,9 @@ async function translateText(sourceLang, targetLang) {
     }
 
     const url =
-      "https://api.mymemory.translated.net/get?q=" +
-      encodeURIComponent(text) +
-      "&langpair=" + sourceLang + "|" + targetLang;
+        "https://api.mymemory.translated.net/get?q=" +
+        encodeURIComponent(text) +
+        "&langpair=" + sourceLang + "|" + targetLang;
 
     try {
         const response = await fetch(url);
