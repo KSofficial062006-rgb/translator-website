@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>English to Hindi Translator</title>
+</head>
+
+<body style="text-align:center; font-family:Arial;">
+  <h1>English to Hindi Translator</h1>
+
+  <textarea id="text" rows="5" cols="40" placeholder="Type English here"></textarea><br><br>
+
+  <button onclick="translateText()">Translate</button>
+
+  <p id="result"></p>
+
+ <script>
+  async function translateText() {
+    const text = document.getElementById("text").value;
+
+    if (text.trim() === "") {
+      alert("Please enter text");
+      return;
+    }
+
+    const url =
+      "https://api.mymemory.translated.net/get?q=" +
+      encodeURIComponent(text) +
+      "&langpair=en|hi";
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      document.getElementById("result").innerText =
+        data.responseData.translatedText;
+    } catch (error) {
+      document.getElementById("result").innerText =
+        "Translation failed. Please try again.";
+    }
+  }
+</script>
+</body>
+</html>
