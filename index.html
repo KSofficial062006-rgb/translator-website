@@ -155,7 +155,11 @@ footer a {
   <textarea id="text" placeholder="Type English or Hindi text..."></textarea>
 
   <div class="actions">
-   <button onclick="autoTranslate()">Translate</button>
+  <button onclick="autoTranslate()">Auto Translate</button>
+<button onclick="translateText('en','pa')">English → Punjabi</button>
+<button onclick="translateText('en','ur')">English → Urdu</button>
+<button onclick="translateText('en','mr')">English → Marathi</button>
+
   </div>
 
   <div class="loader" id="loader">Translating...</div>
@@ -220,6 +224,7 @@ function autoTranslate() {
 
 </body>
 </html>
+
 
 
 
