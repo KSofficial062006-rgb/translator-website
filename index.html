@@ -2,177 +2,193 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>English ↔ Hindi Translator</title>
+<title>LinguaPro Translator</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-    :root {
-        --purple: #6d28d9;
-        --purple-dark: #5b21b6;
-        --light-bg: #f9fafb;
-        --border: #e5e7eb;
-        --text: #111827;
-        --subtext: #6b7280;
-    }
+:root {
+  --purple: #6d28d9;
+  --purple-dark: #5b21b6;
+  --bg: #f9fafb;
+  --border: #e5e7eb;
+  --text: #111827;
+  --sub: #6b7280;
+}
 
-    * {
-        box-sizing: border-box;
-    }
+* { box-sizing: border-box; }
 
-    body {
-        margin: 0;
-        font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-        background: var(--light-bg);
-        color: var(--text);
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-    }
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
 
-    .card {
-        width: 100%;
-        max-width: 700px;
-        background: white;
-        border-radius: 14px;
-        border: 1px solid var(--border);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.06);
-        padding: 35px;
-    }
+.card {
+  width: 100%;
+  max-width: 760px;
+  background: white;
+  border-radius: 16px;
+  padding: 35px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.08);
+  border: 1px solid var(--border);
+}
 
-    h1 {
-        margin: 0;
-        font-size: 28px;
-        font-weight: 700;
-        color: var(--purple);
-        text-align: center;
-    }
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--purple);
+}
 
-    .subtitle {
-        text-align: center;
-        color: var(--subtext);
-        margin-top: 8px;
-        margin-bottom: 30px;
-        font-size: 15px;
-    }
+.subtitle {
+  text-align: center;
+  color: var(--sub);
+  margin: 10px 0 30px;
+}
 
-    textarea {
-        width: 100%;
-        height: 140px;
-        padding: 14px;
-        font-size: 16px;
-        border-radius: 10px;
-        border: 1px solid var(--border);
-        outline: none;
-        resize: none;
-        transition: border 0.2s, box-shadow 0.2s;
-    }
+textarea {
+  width: 100%;
+  height: 140px;
+  padding: 14px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  outline: none;
+}
 
-    textarea:focus {
-        border-color: var(--purple);
-        box-shadow: 0 0 0 3px rgba(109,40,217,0.15);
-    }
+textarea:focus {
+  border-color: var(--purple);
+  box-shadow: 0 0 0 3px rgba(109,40,217,.15);
+}
 
-    .actions {
-        margin-top: 18px;
-        display: flex;
-        gap: 12px;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
 
-    button {
-        background: var(--purple);
-        color: white;
-        border: none;
-        border-radius: 8px;
-        padding: 12px 20px;
-        font-size: 15px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background 0.2s, transform 0.1s;
-    }
+button {
+  background: var(--purple);
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
 
-    button:hover {
-        background: var(--purple-dark);
-    }
+button:hover {
+  background: var(--purple-dark);
+}
 
-    button:active {
-        transform: scale(0.98);
-    }
+.result-box {
+  margin-top: 25px;
+  padding: 16px;
+  border-radius: 10px;
+  background: #faf5ff;
+  border: 1px solid #e9d5ff;
+  min-height: 60px;
+  font-size: 17px;
+  position: relative;
+}
 
-    .result-box {
-        margin-top: 25px;
-        border-radius: 10px;
-        background: #faf5ff;
-        border: 1px solid #e9d5ff;
-        padding: 16px;
-        min-height: 50px;
-        font-size: 17px;
-        line-height: 1.5;
-    }
+.copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: white;
+  color: var(--purple);
+  border: 1px solid var(--purple);
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
 
-    footer {
-        margin-top: 30px;
-        text-align: center;
-        font-size: 13px;
-        color: var(--subtext);
-    }
+.loader {
+  display: none;
+  text-align: center;
+  color: var(--sub);
+  margin-top: 15px;
+}
 
-    @media (max-width: 500px) {
-        h1 {
-            font-size: 24px;
-        }
-    }
+footer {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--sub);
+}
+
+footer a {
+  color: var(--purple);
+  text-decoration: none;
+  margin-left: 5px;
+}
 </style>
 </head>
 
 <body>
 
 <div class="card">
-    <h1>English ↔ Hindi Translator</h1>
-    <div class="subtitle">
-        Accurate, fast and simple language translation
-    </div>
+  <div class="logo">🔤 LinguaPro</div>
+  <div class="subtitle">Professional English ↔ Hindi Translation</div>
 
-    <textarea id="text" placeholder="Enter English or Hindi text here..."></textarea>
+  <textarea id="text" placeholder="Type English or Hindi text..."></textarea>
 
-    <div class="actions">
-        <button onclick="translateText('en','hi')">English → Hindi</button>
-        <button onclick="translateText('hi','en')">Hindi → English</button>
-    </div>
+  <div class="actions">
+    <button onclick="translateText('en','hi')">English → Hindi</button>
+    <button onclick="translateText('hi','en')">Hindi → English</button>
+  </div>
 
-    <div class="result-box" id="result"></div>
+  <div class="loader" id="loader">Translating...</div>
 
-    <footer>
-        © 2026 · Language Translator
-    </footer>
+  <div class="result-box">
+    <button class="copy-btn" onclick="copyText()">Copy</button>
+    <div id="result"></div>
+  </div>
+
+  <footer>
+    © 2026 LinguaPro
+    <a href="privacy.html">Privacy Policy</a>
+  </footer>
 </div>
 
 <script>
-async function translateText(sourceLang, targetLang) {
-    const text = document.getElementById("text").value;
+async function translateText(from, to) {
+  const text = document.getElementById("text").value;
+  if (!text.trim()) return alert("Enter text");
 
-    if (text.trim() === "") {
-        alert("Please enter text");
-        return;
-    }
+  document.getElementById("loader").style.display = "block";
+  document.getElementById("result").innerText = "";
 
-    const url =
-        "https://api.mymemory.translated.net/get?q=" +
-        encodeURIComponent(text) +
-        "&langpair=" + sourceLang + "|" + targetLang;
+  const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${from}|${to}`;
 
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
-        document.getElementById("result").innerText =
-            data.responseData.translatedText;
-    } catch (error) {
-        document.getElementById("result").innerText =
-            "Translation failed. Please try again.";
-    }
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    document.getElementById("result").innerText = data.responseData.translatedText;
+  } catch {
+    document.getElementById("result").innerText = "Translation failed.";
+  }
+
+  document.getElementById("loader").style.display = "none";
+}
+
+function copyText() {
+  const text = document.getElementById("result").innerText;
+  navigator.clipboard.writeText(text);
+  alert("Copied!");
 }
 </script>
 
