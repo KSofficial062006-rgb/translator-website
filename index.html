@@ -223,7 +223,8 @@ function autoTranslate() {
   translateText(from, to);
 }
 </script>
- // Voice input
+<script>
+// Voice input
 function startListening() {
   if (!('webkitSpeechRecognition' in window)) {
     alert('Your browser does not support voice recognition.');
@@ -231,13 +232,13 @@ function startListening() {
   }
 
   const recognition = new webkitSpeechRecognition();
-  recognition.lang = 'en-IN'; // English (India)
+  recognition.lang = 'en-IN';
   recognition.interimResults = false;
   recognition.maxAlternatives = 1;
 
   recognition.onresult = function(event) {
-    const speechText = event.results[0][0].transcript;
-    document.getElementById('text').value = speechText;
+    document.getElementById('text').value =
+      event.results[0][0].transcript;
   };
 
   recognition.start();
@@ -249,16 +250,17 @@ function speakTranslation() {
   if (!text) return;
 
   const msg = new SpeechSynthesisUtterance(text);
-
-  // Automatically choose language
   const hindiLetters = /[\u0900-\u097F]/;
   msg.lang = hindiLetters.test(text) ? 'hi-IN' : 'en-IN';
 
   window.speechSynthesis.speak(msg);
 }
+</script>
+
 
 </body>
 </html>
+
 
 
 
