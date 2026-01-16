@@ -155,8 +155,7 @@ footer a {
   <textarea id="text" placeholder="Type English or Hindi text..."></textarea>
 
   <div class="actions">
-    <button onclick="translateText('en','hi')">English → Hindi</button>
-    <button onclick="translateText('hi','en')">Hindi → English</button>
+   <button onclick="autoTranslate()">Translate</button>
   </div>
 
   <div class="loader" id="loader">Translating...</div>
@@ -199,9 +198,29 @@ function copyText() {
   alert("Copied!");
 }
 </script>
+<script>
+function detectLanguage(text) {
+  const hindiLetters = /[\u0900-\u097F]/;
+  return hindiLetters.test(text) ? "hi" : "en";
+}
+
+function autoTranslate() {
+  const text = document.getElementById("text").value;
+  if (text.trim() === "") {
+    alert("Please enter text");
+    return;
+  }
+
+  const from = detectLanguage(text);
+  const to = from === "en" ? "hi" : "en";
+
+  translateText(from, to);
+}
+</script>
 
 </body>
 </html>
+
 
 
 
