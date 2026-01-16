@@ -154,7 +154,7 @@ footer a {
   <div class="subtitle">Professional English ↔ Hindi Translation</div>
 
   <textarea id="text" placeholder="Type English or Hindi text..."></textarea>
-
+<button onclick="startListening()">🎤 Speak</button>
   <div class="actions">
   <button onclick="autoTranslate()">Auto Translate</button>
 <button onclick="translateText('en','pa')">English → Punjabi</button>
@@ -168,6 +168,7 @@ footer a {
   <div class="result-box">
     <button class="copy-btn" onclick="copyText()">Copy</button>
     <div id="result"></div>
+   <button onclick="speakTranslation()">🔊 Listen</button>
   </div>
 
   <footer>
@@ -222,9 +223,43 @@ function autoTranslate() {
   translateText(from, to);
 }
 </script>
+ // Voice input
+function startListening() {
+  if (!('webkitSpeechRecognition' in window)) {
+    alert('Your browser does not support voice recognition.');
+    return;
+  }
+
+  const recognition = new webkitSpeechRecognition();
+  recognition.lang = 'en-IN'; // English (India)
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+
+  recognition.onresult = function(event) {
+    const speechText = event.results[0][0].transcript;
+    document.getElementById('text').value = speechText;
+  };
+
+  recognition.start();
+}
+
+// Voice output
+function speakTranslation() {
+  const text = document.getElementById('result').innerText;
+  if (!text) return;
+
+  const msg = new SpeechSynthesisUtterance(text);
+
+  // Automatically choose language
+  const hindiLetters = /[\u0900-\u097F]/;
+  msg.lang = hindiLetters.test(text) ? 'hi-IN' : 'en-IN';
+
+  window.speechSynthesis.speak(msg);
+}
 
 </body>
 </html>
+
 
 
 
